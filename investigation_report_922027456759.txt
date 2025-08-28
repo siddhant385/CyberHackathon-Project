@@ -1,0 +1,73 @@
+============================================================
+IPDR INVESTIGATION REPORT
+============================================================
+Generated: 2025-08-28 13:35:11.130471
+
+USER DETAILS:
+  Aadhaar: 922027456759
+  Name: Charvi Mohan
+  Phone: 9402130679
+  City: Ahmedabad
+  Suspicious: False
+
+ACTIVITY SUMMARY:
+  Total Sessions: 19
+  Data Upload: 1.4 MB
+  Data Download: 50.09 MB
+  Unique Destinations: 13
+  Suspicious Sessions: 0
+
+COMMUNICATION PARTNERS (13):
+  1. IP: 147.164.93.184
+     Sessions: 1
+     Upload: 0.27 MB
+     Download: 2.70 MB
+
+  2. IP: 142.250.183.109
+     Sessions: 2
+     Upload: 0.01 MB
+     Download: 0.04 MB
+
+  3. IP: 192.168.1.220
+     Sessions: 2
+     Upload: 0.05 MB
+     Download: 0.18 MB
+
+  4. IP: 117.192.102.166
+     Sessions: 1
+     Upload: 0.04 MB
+     Download: 0.26 MB
+
+  5. IP: 217.247.50.255
+     Sessions: 1
+     Upload: 0.00 MB
+     Download: 0.08 MB
+
+  6. IP: 157.240.12.35
+     Sessions: 3
+     Upload: 0.18 MB
+     Download: 1.38 MB
+
+  7. IP: 197.89.240.200
+     Sessions: 1
+     Upload: 0.01 MB
+     Download: 0.05 MB
+
+  8. IP: 31.13.64.35
+     Sessions: 3
+     Upload: 0.21 MB
+     Download: 2.74 MB
+
+  9. IP: 8.249.218.250
+     Sessions: 1
+     Upload: 0.00 MB
+     Download: 0.02 MB
+
+  10. IP: 192.168.1.65
+     Sessions: 1
+     Upload: 0.01 MB
+     Download: 0.45 MB
+
+============================================================
+END OF REPORT
+============================================================

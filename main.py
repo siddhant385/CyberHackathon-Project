@@ -1,45 +1,75 @@
 # main.py
 from sqlmodel import Session
-from app.core.database import init_db, get_session, engine
+from app.core.database import init_db, engine
+from app.core.logger import get_logger
 
-# CRUD classes ko import karein
-from app.crud.user_crud import UserCRUD
-from app.crud.ipdr_crud import IPDRLogCRUD
+# Business Service classes ko import karein
+from app.services.user_service import UserService
+from app.services.ipdr_service import IPDRService
 
 # Parser classes ko import karein
 from app.operators.dummy_parser import UserCSVParser
 from app.operators.ipdr_log_parser import IPDRLogCSVParser
 
+# Logger setup
+logger = get_logger(__name__)
+
 def main():
     """
     Main function to initialize the database and load data from CSV files.
+    Uses business service layer for better separation of concerns.
     """
-    print("--- Script Started ---")
+    logger.info("=== IPDR Analysis System Started ===")
     
-    # Step 1: Database aur Tables ko initialize karein
-    # Yeh function aapke models ke aadhar par saari tables bana dega.
-    # Isko sirf pehli baar chalane ki zaroorat hai.
-    init_db()
-
-    # Step 2: CRUD aur Parser instances banayein
-    user_crud = UserCRUD()
-    ipdr_crud = IPDRLogCRUD()
-    
-    user_parser = UserCSVParser(crud_instance=user_crud)
-    ipdr_parser = IPDRLogCSVParser(crud_instance=ipdr_crud)
-
-    # Step 3: Database session praapt karein
-    # 'with' statement use karne se session automatically close ho jaata hai.
-    with Session(engine) as session:
-        print("\n--- Loading User Data ---")
-        # Apne user data CSV file ka path yahaan dein
-        user_parser.parse_and_load(file_path="Generator/realistic_users_24h_20250824_021654.csv", session=session)
+    try:
+        # Step 1: Database aur Tables ko initialize karein
+        logger.info("Initializing database...")
+        init_db()
         
-        print("\n--- Loading IPDR Log Data ---")
-        # Apne IPDR logs CSV file ka path yahaan dein
-        ipdr_parser.parse_and_load(file_path="Generator/realistic_ipdr_24h_20250824_021654.csv", session=session)
+        # Step 2: Business Service instances banayein
+        user_service = UserService()
+        ipdr_service = IPDRService()
+        
+        # Step 3: Parser instances banayein with CRUD from services
+        user_parser = UserCSVParser(crud_instance=user_service.crud)
+        ipdr_parser = IPDRLogCSVParser(crud_instance=ipdr_service.crud)
 
-    print("\n--- Script Finished ---")
+        # Step 4: Database session praapt karein
+        with Session(engine) as session:
+            logger.info("Loading User Data...")
+            user_parser.parse_and_load(
+                file_path="Generator/realistic_users_24h_20250824_021654.csv", 
+                session=session
+            )
+            
+            logger.info("Loading IPDR Log Data...")
+            ipdr_parser.parse_and_load(
+                file_path="Generator/realistic_ipdr_24h_20250824_021654.csv", 
+                session=session
+            )
+            
+            # Demonstration of business service capabilities
+            logger.info("=== Demonstrating Business Service Features ===")
+            
+            # Count records
+            user_count = user_service.count_records(session)
+            ipdr_count = ipdr_service.count_records(session)
+            logger.info(f"Total Users: {user_count}")
+            logger.info(f"Total IPDR Logs: {ipdr_count}")
+            
+            # Find suspicious users
+            suspicious_users = user_service.find_suspicious_users(session)
+            logger.info(f"Suspicious Users Found: {len(suspicious_users)}")
+            
+            # Find suspicious logs
+            suspicious_logs = ipdr_service.find_suspicious_logs(session)
+            logger.info(f"Suspicious Logs Found: {len(suspicious_logs)}")
+
+        logger.info("=== IPDR Analysis System Completed Successfully ===")
+        
+    except Exception as e:
+        logger.error(f"Error in main execution: {str(e)}")
+        raise
 
 if __name__ == "__main__":
     main()

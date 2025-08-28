@@ -1,0 +1,101 @@
+2025-08-28 13:34:25 | [32mINFO[0m | __main__ | main:22 | === IPDR Analysis System Started ===
+2025-08-28 13:34:25 | [32mINFO[0m | __main__ | main:26 | Initializing database...
+2025-08-28 13:34:25 | [32mINFO[0m | app.core.database | init_db:38 | Initializing database and creating tables...
+2025-08-28 13:34:25 | [32mINFO[0m | app.core.database | init_db:47 | Database initialized successfully.
+2025-08-28 13:34:25 | [32mINFO[0m | app.core.database | init_db:48 | Database URL: sqlite:///./data/data.db
+2025-08-28 13:34:25 | [32mINFO[0m | __main__ | main:39 | Loading User Data...
+2025-08-28 13:34:25 | [32mINFO[0m | __main__ | main:45 | Loading IPDR Log Data...
+2025-08-28 13:34:25 | [32mINFO[0m | __main__ | main:52 | === Demonstrating Business Service Features ===
+2025-08-28 13:34:25 | [31mERROR[0m | __main__ | main:71 | Error in main execution: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (sqlite3.IntegrityError) UNIQUE constraint failed: usermodel.PhoneNo
+[SQL: INSERT INTO usermodel ("AadhaarNo", "Name", "Age", "Address", "Email", "PhoneNo", "City", "State", "Devices", "AssignedIPs", "ISP", "IsSuspicious", "SuspiciousType", "HomeLocation", "UsualActiveHours") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)]
+[parameters: ('922027456759', 'Charvi Mohan', 47, '83/838, Vala Chowk, Ahmedabad, Gujarat - 147456', 'charvi.mohan3@gmail.com', '9402130679', 'Ahmedabad', 'Gujarat', '[]', '[]', 'Vi', 0, '[]', '{}', '[]')]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-08-28 13:34:58 | [32mINFO[0m | __main__ | main:22 | === IPDR Analysis System Started ===
+2025-08-28 13:34:58 | [32mINFO[0m | __main__ | main:26 | Initializing database...
+2025-08-28 13:34:58 | [32mINFO[0m | app.core.database | init_db:38 | Initializing database and creating tables...
+2025-08-28 13:34:58 | [32mINFO[0m | app.core.database | init_db:47 | Database initialized successfully.
+2025-08-28 13:34:58 | [32mINFO[0m | app.core.database | init_db:48 | Database URL: sqlite:///./data/data.db
+2025-08-28 13:34:58 | [32mINFO[0m | __main__ | main:39 | Loading User Data...
+2025-08-28 13:34:58 | [32mINFO[0m | __main__ | main:45 | Loading IPDR Log Data...
+2025-08-28 13:34:59 | [32mINFO[0m | __main__ | main:52 | === Demonstrating Business Service Features ===
+2025-08-28 13:34:59 | [32mINFO[0m | __main__ | main:57 | Total Users: 100
+2025-08-28 13:34:59 | [32mINFO[0m | __main__ | main:58 | Total IPDR Logs: 2400
+2025-08-28 13:34:59 | [32mINFO[0m | app.services.user_service | find_suspicious_users:67 | Found 0 suspicious users
+2025-08-28 13:34:59 | [32mINFO[0m | __main__ | main:62 | Suspicious Users Found: 0
+2025-08-28 13:34:59 | [32mINFO[0m | app.services.ipdr_service | find_suspicious_logs:141 | Found 0 suspicious logs
+2025-08-28 13:34:59 | [32mINFO[0m | __main__ | main:66 | Suspicious Logs Found: 0
+2025-08-28 13:34:59 | [32mINFO[0m | __main__ | main:68 | === IPDR Analysis System Completed Successfully ===
+2025-08-28 13:35:10 | [32mINFO[0m | app.core.database | init_db:38 | Initializing database and creating tables...
+2025-08-28 13:35:10 | [32mINFO[0m | app.core.database | init_db:47 | Database initialized successfully.
+2025-08-28 13:35:10 | [32mINFO[0m | app.core.database | init_db:48 | Database URL: sqlite:///./data/data.db
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:18 | === IPDR Investigation Demo ===
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:35 | Demo User: Charvi Mohan (922027456759)
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:38 | 
+--- User Activity Summary ---
+2025-08-28 13:35:10 | [32mINFO[0m | app.services.ipdr_service | find_logs_by_user:46 | Found 19 logs for user: 922027456759
+2025-08-28 13:35:10 | [32mINFO[0m | app.services.ipdr_service | get_user_activity_summary:194 | Generated activity summary for user: 922027456759
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:41 | user_id: 922027456759
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:41 | total_sessions: 19
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:41 | total_upload_mb: 1.4
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:41 | total_download_mb: 50.09
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:41 | total_duration_hours: 1.8
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:41 | unique_services: ['Gmail', 'Facebook', 'WhatsApp', 'YouTube', 'Banking', 'Instagram']
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:41 | protocols_used: ['HTTPS', 'IMAP']
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:41 | unique_destinations: 13
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:41 | first_activity: 2025-08-23 06:40:09.532943
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:41 | last_activity: 2025-08-23 23:06:13.532943
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:41 | suspicious_sessions: 0
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:44 | 
+--- Communication Partners (B-parties) ---
+2025-08-28 13:35:10 | [32mINFO[0m | app.services.ipdr_service | find_communication_partners:96 | Found 13 communication partners for user: 922027456759
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:46 | Found 13 communication partners
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:49 | 1. IP: 147.164.93.184
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:50 |    Sessions: 1
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:51 |    Data: 0.3MB up, 2.7MB down
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:49 | 2. IP: 142.250.183.109
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:50 |    Sessions: 2
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:51 |    Data: 0.0MB up, 0.0MB down
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:49 | 3. IP: 192.168.1.220
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:50 |    Sessions: 2
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:51 |    Data: 0.0MB up, 0.2MB down
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:54 | 
+--- Comprehensive Investigation ---
+2025-08-28 13:35:10 | [32mINFO[0m | app.services.investigation_service | investigate_user_relationships:29 | Starting investigation for user: 922027456759
+2025-08-28 13:35:10 | [32mINFO[0m | app.services.ipdr_service | find_communication_partners:96 | Found 13 communication partners for user: 922027456759
+2025-08-28 13:35:10 | [32mINFO[0m | app.services.ipdr_service | find_logs_by_user:46 | Found 19 logs for user: 922027456759
+2025-08-28 13:35:10 | [32mINFO[0m | app.services.ipdr_service | get_user_activity_summary:194 | Generated activity summary for user: 922027456759
+2025-08-28 13:35:10 | [32mINFO[0m | app.services.ipdr_service | find_logs_by_user:46 | Found 19 logs for user: 922027456759
+2025-08-28 13:35:10 | [32mINFO[0m | app.services.ipdr_service | find_logs_by_user:46 | Found 19 logs for user: 922027456759
+2025-08-28 13:35:10 | [32mINFO[0m | app.services.investigation_service | investigate_user_relationships:64 | Investigation completed for user: 922027456759
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:58 | Investigation completed successfully!
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:59 | Anomalies detected: 0
+2025-08-28 13:35:10 | [32mINFO[0m | __main__ | demo_investigation_features:66 | 
+--- Connected Users Network ---
+2025-08-28 13:35:10 | [32mINFO[0m | app.services.ipdr_service | find_logs_by_user:46 | Found 19 logs for user: 922027456759
+2025-08-28 13:35:11 | [32mINFO[0m | app.services.investigation_service | find_connected_users:109 | Found 399 connected users for: 922027456759
+2025-08-28 13:35:11 | [32mINFO[0m | __main__ | demo_investigation_features:68 | Found 399 connected users
+2025-08-28 13:35:11 | [32mINFO[0m | __main__ | demo_investigation_features:71 | Connected: Barkha Sen via 157.240.12.35
+2025-08-28 13:35:11 | [32mINFO[0m | __main__ | demo_investigation_features:71 | Connected: Kalpit Pillay via 157.240.12.35
+2025-08-28 13:35:11 | [32mINFO[0m | __main__ | demo_investigation_features:71 | Connected: Jai Arya via 157.240.12.35
+2025-08-28 13:35:11 | [32mINFO[0m | __main__ | demo_investigation_features:74 | 
+--- Generating Investigation Report ---
+2025-08-28 13:35:11 | [32mINFO[0m | app.services.investigation_service | investigate_user_relationships:29 | Starting investigation for user: 922027456759
+2025-08-28 13:35:11 | [32mINFO[0m | app.services.ipdr_service | find_communication_partners:96 | Found 13 communication partners for user: 922027456759
+2025-08-28 13:35:11 | [32mINFO[0m | app.services.ipdr_service | find_logs_by_user:46 | Found 19 logs for user: 922027456759
+2025-08-28 13:35:11 | [32mINFO[0m | app.services.ipdr_service | get_user_activity_summary:194 | Generated activity summary for user: 922027456759
+2025-08-28 13:35:11 | [32mINFO[0m | app.services.ipdr_service | find_logs_by_user:46 | Found 19 logs for user: 922027456759
+2025-08-28 13:35:11 | [32mINFO[0m | app.services.ipdr_service | find_logs_by_user:46 | Found 19 logs for user: 922027456759
+2025-08-28 13:35:11 | [32mINFO[0m | app.services.investigation_service | investigate_user_relationships:64 | Investigation completed for user: 922027456759
+2025-08-28 13:35:11 | [32mINFO[0m | __main__ | demo_investigation_features:82 | Investigation report saved to: investigation_report_922027456759.txt
+2025-08-28 13:35:11 | [32mINFO[0m | __main__ | demo_investigation_features:85 | 
+--- High Traffic Analysis ---
+2025-08-28 13:35:11 | [32mINFO[0m | app.services.ipdr_service | analyze_high_traffic_sessions:155 | Found 43 high traffic sessions (>50MB)
+2025-08-28 13:35:11 | [32mINFO[0m | __main__ | demo_investigation_features:87 | Found 43 high traffic sessions (>50MB)
+2025-08-28 13:35:11 | [32mINFO[0m | __main__ | demo_investigation_features:90 | 
+--- Suspicious Activity Analysis ---
+2025-08-28 13:35:11 | [32mINFO[0m | app.services.user_service | find_suspicious_users:67 | Found 0 suspicious users
+2025-08-28 13:35:11 | [32mINFO[0m | app.services.ipdr_service | find_suspicious_logs:141 | Found 0 suspicious logs
+2025-08-28 13:35:11 | [32mINFO[0m | __main__ | demo_investigation_features:94 | Suspicious users: 0
+2025-08-28 13:35:11 | [32mINFO[0m | __main__ | demo_investigation_features:95 | Suspicious logs: 0
+2025-08-28 13:35:11 | [32mINFO[0m | __main__ | demo_investigation_features:97 | 
+=== Investigation Demo Completed ===
