@@ -61,13 +61,35 @@ class IPDRLogCSVParser(BaseParser):
                     )
                     logs_to_create.append(log_data)
                 
-                # Insert all logs in a single transaction for efficiency
+                # Insert logs with better error handling
                 if logs_to_create:
-                    session.add_all(logs_to_create)
-                    session.commit()
-                    print(f"Successfully loaded {len(logs_to_create)} IPDR logs into the database.")
+                    try:
+                        # Use individual inserts for better error handling
+                        created_count = 0
+                        error_count = 0
+                        
+                        for log in logs_to_create:
+                            try:
+                                session.add(log)
+                                session.commit()
+                                created_count += 1
+                            except Exception as log_error:
+                                session.rollback()
+                                error_count += 1
+                                print(f"Error creating log for {log.AadhaarNo}: {str(log_error)}")
+                                continue
+                        
+                        print(f"Successfully loaded {created_count} IPDR logs into the database.")
+                        if error_count > 0:
+                            print(f"Failed to load {error_count} logs due to errors.")
+                    
+                    except Exception as batch_error:
+                        session.rollback()
+                        print(f"Batch error: {str(batch_error)}")
+                        raise
 
         except FileNotFoundError:
             print(f"Error: File not found at {file_path}")
         except Exception as e:
             print(f"An error occurred while parsing IPDR logs: {e}")
+            raise

@@ -37,13 +37,33 @@ class UserCSVParser(BaseParser):
                     )
                     users_to_create.append(user_data)
                 
-                # Bulk insert can be done here if needed
+                # Insert users with duplicate handling
+                created_count = 0
+                duplicate_count = 0
+                error_count = 0
+                
                 for user in users_to_create:
-                    self.user_crud.create(session, user)
+                    try:
+                        # Check if user already exists
+                        existing_user = self.user_crud.read(session, user.AadhaarNo)
+                        if existing_user:
+                            duplicate_count += 1
+                            print(f"Duplicate user skipped: {user.AadhaarNo} - {user.Name}")
+                            continue
+                        
+                        self.user_crud.create(session, user)
+                        created_count += 1
+                        
+                    except Exception as user_error:
+                        error_count += 1
+                        print(f"Error creating user {user.AadhaarNo}: {str(user_error)}")
+                        continue
 
-            print(f"Successfully parsed and loaded data from {file_path}")
+            print(f"Successfully processed {file_path}")
+            print(f"Created: {created_count}, Duplicates: {duplicate_count}, Errors: {error_count}")
 
         except FileNotFoundError:
             print(f"Error: File not found at {file_path}")
         except Exception as e:
             print(f"An error occurred: {e}")
+            raise

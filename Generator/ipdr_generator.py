@@ -9,7 +9,7 @@ from faker import Faker
 
 from models.user_model import UserModel
 from models.ipdr_model import IPDRModel
-from utils.config import SERVICES, SERVICE_SERVERS, SUSPICIOUS_IPS, SUSPICIOUS_LOCATIONS
+from app.core.config import settings
 
 fake = Faker("en_IN")
 
@@ -29,8 +29,8 @@ class RealisticIPDRGenerator:
                 b_user = random.choice(active_contacts)
                 return random.choice(b_user.AssignedIPs), 443
         
-        servers = SERVICE_SERVERS.get(service, [fake.ipv4_public()])
-        port = random.choice(SERVICES.get(service, {}).get("ports", [443]))
+        servers = settings.GENERATOR_SERVICE_SERVERS.get(service, [fake.ipv4_public()])
+        port = random.choice(settings.GENERATOR_SERVICES.get(service, {}).get("ports", [443]))
         return random.choice(servers), port
     
     def _generate_current_location(self, user: UserModel):
@@ -43,7 +43,7 @@ class RealisticIPDRGenerator:
         return {"lat": round(home["lat"] + lat_offset, 6), "lng": round(home["lng"] + lng_offset, 6)}
 
     def _generate_record(self, user: UserModel, timestamp: datetime) -> IPDRModel:
-        service_details = SERVICES.get(self._select_realistic_service(user, timestamp), SERVICES["Unknown"])
+        service_details = settings.GENERATOR_SERVICES.get(self._select_realistic_service(user, timestamp), settings.GENERATOR_SERVICES["Unknown"])
         service_name = service_details["name"]
         
         duration = random.choices([random.randint(30, 300), random.randint(300, 1800)], weights=[70, 30])[0]
@@ -70,7 +70,7 @@ class RealisticIPDRGenerator:
             record.SuspiciousFlags.append("Large data transfer")
         if user.IsSuspicious and "suspicious_destinations" in user.SuspiciousType:
             record.IsSuspicious = True
-            record.DestinationIP = random.choice(SUSPICIOUS_IPS)
+            record.DestinationIP = random.choice(settings.GENERATOR_SUSPICIOUS_IPS)
             record.SuspiciousFlags.append("Suspicious destination")
 
         return record

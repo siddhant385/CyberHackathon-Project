@@ -6,7 +6,7 @@ from faker import Faker
 from typing import List, Dict
 
 from models.user_model import UserModel
-from utils.config import CITIES, STATES, ISPS, SUSPICIOUS_BEHAVIORS, CITY_COORDS, IP_RANGES
+from app.core.config import settings
 
 fake = Faker("en_IN")
 
@@ -18,7 +18,7 @@ class RealisticUserGenerator:
         self._generate_users()
 
     def _generate_location(self, city: str) -> Dict[str, float]:
-        base = CITY_COORDS.get(city, {"lat": 20.0, "lng": 77.0, "radius": 0.5})
+        base = settings.GENERATOR_CITY_COORDS.get(city, {"lat": 20.0, "lng": 77.0, "radius": 0.5})
         angle = random.uniform(0, 2 * math.pi)
         distance = random.uniform(0, base["radius"])
         lat_offset = distance * math.cos(angle)
@@ -32,7 +32,7 @@ class RealisticUserGenerator:
         return f"{tac}{serial}{random.randint(0, 9)}"
 
     def _generate_ip_pool(self, city: str) -> List[str]:
-        base_ranges = IP_RANGES.get(city, ["192.168.1"])
+        base_ranges = settings.GENERATOR_IP_RANGES.get(city, ["192.168.1"])
         ip_pool = []
         for _ in range(random.randint(2, 5)):
             base = random.choice(base_ranges)
@@ -47,8 +47,8 @@ class RealisticUserGenerator:
         return ip_pool
 
     def _generate_normal_user(self) -> UserModel:
-        city = random.choice(CITIES)
-        state = STATES[CITIES.index(city)]
+        city = random.choice(settings.GENERATOR_CITIES)
+        state = settings.GENERATOR_STATES[settings.GENERATOR_CITIES.index(city)]
         aadhaar = ''.join([str(random.randint(0, 9)) for _ in range(12)])
         name = fake.name()
         email_name = name.lower().replace(' ', '.')
@@ -60,7 +60,7 @@ class RealisticUserGenerator:
             Address=f"{fake.building_number()}, {fake.street_name()}, {city}, {state} - {fake.postcode()}",
             Email=email, PhoneNo=phone, City=city, State=state,
             Devices=[self._generate_imei() for _ in range(random.choices([1, 2, 3], weights=[70, 25, 5])[0])],
-            AssignedIPs=self._generate_ip_pool(city), ISP=random.choice(ISPS),
+            AssignedIPs=self._generate_ip_pool(city), ISP=random.choice(settings.GENERATOR_ISPS),
             IsSuspicious=False, HomeLocation=self._generate_location(city),
             UsualActiveHours=list(range(6, 23))
         )
@@ -68,7 +68,7 @@ class RealisticUserGenerator:
     def _generate_suspicious_user(self) -> UserModel:
         user = self._generate_normal_user()
         user.IsSuspicious = True
-        user.SuspiciousType = random.sample(SUSPICIOUS_BEHAVIORS, random.randint(1, 3))
+        user.SuspiciousType = random.sample(settings.GENERATOR_SUSPICIOUS_BEHAVIORS, random.randint(1, 3))
 
         if "location_hopping" in user.SuspiciousType:
             cities = ["Mumbai", "Delhi", "Bangalore"]
