@@ -1,0 +1,23 @@
+REALISTIC IPDR DATASET SUMMARY
+==================================================
+
+📊 DATASET STATISTICS
+Time Window: 24 hours
+Total Records: 2,400
+Total Users: 100
+
+Normal Users: 90
+Suspicious Users: 10
+
+Normal Records: 2,321
+Suspicious Records: 79
+
+📱 SERVICE USAGE BREAKDOWN
+------------------------------
+YouTube: 612 records (25.5%)
+WhatsApp: 581 records (24.2%)
+Gmail: 312 records (13.0%)
+Instagram: 304 records (12.7%)
+Banking: 299 records (12.5%)
+Facebook: 292 records (12.2%)
+
